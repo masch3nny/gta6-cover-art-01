@@ -1,3 +1,5 @@
+// Sunset Cover Studio: a multi-panel poster cover maker built for this
+// bounty — the app under app/ is the entry; this program only hands it in.
 // A working gta6-cover-art-01 entry (Node 22, standard library only): the app is this directory's app/ folder, plain
 // static files a desktop browser loads offline (app/index.html and its ES modules, no library and no network
 // request), and the program hands it in. It copies app/ and screenshots/ from beside this file to /output and writes
