@@ -1,23 +1,99 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
-<link rel="stylesheet" href="./style.css">
+<title>Sunset Cover Studio — make your own poster cover</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
-    <p id="status" role="status"></p>
-  </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
-</main>
-<script type="module" src="./src/main.js"></script>
+<div id="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-sun"></span>
+      <div>
+        <h1>Sunset Cover Studio</h1>
+        <p>Turn your photo into a poster cover. Pick a layout, pick a grade, write a caption, export a PNG.</p>
+      </div>
+    </div>
+    <div class="steps">
+      <span class="step"><b>1</b> Photo</span>
+      <span class="step"><b>2</b> Layout &amp; grade</span>
+      <span class="step"><b>3</b> Caption</span>
+      <span class="step"><b>4</b> Export</span>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="preview-col">
+      <div class="preview-frame">
+        <canvas id="preview" width="960" height="540"></canvas>
+      </div>
+      <div class="preview-tools">
+        <label class="zoom-label">Zoom panel
+          <input id="zoom-slider" type="range" min="1" max="4" step="0.05" value="1.15">
+        </label>
+        <span class="hint">Click a panel to select it · drag to move its photo · scroll to zoom</span>
+      </div>
+    </section>
+
+    <aside class="controls">
+      <section class="panel-block">
+        <h2>Photos</h2>
+        <div id="tray" class="tray"></div>
+        <div class="row">
+          <label class="upload-btn" for="upload">+ Upload your photos</label>
+          <input id="upload" type="file" accept="image/*" multiple hidden>
+          <button id="fill-all" type="button" class="ghost-btn">Fill all panels</button>
+        </div>
+        <p class="note">Your photos never leave this machine — they are read in your browser only. Tap a photo to put it in the selected panel.</p>
+      </section>
+
+      <section class="panel-block">
+        <h2>Layout</h2>
+        <div id="layout-picker" class="picker"></div>
+      </section>
+
+      <section class="panel-block">
+        <h2>Colour grade</h2>
+        <div id="grade-picker" class="picker"></div>
+      </section>
+
+      <section class="panel-block">
+        <h2>Caption</h2>
+        <label class="field">Title
+          <input id="title-input" type="text" maxlength="24" value="SUNSET HEIST">
+        </label>
+        <label class="field">Subtitle
+          <input id="subtitle-input" type="text" maxlength="40" value="A Solmar Bay story">
+        </label>
+        <label class="field">Tagline
+          <input id="tagline-input" type="text" maxlength="60" value="Every sunset has a price.">
+        </label>
+        <h3>Lettering</h3>
+        <div id="lettering-picker" class="picker"></div>
+      </section>
+
+      <section class="panel-block">
+        <h2>Post size</h2>
+        <div id="size-picker" class="picker"></div>
+      </section>
+
+      <div class="actions">
+        <button id="shuffle" type="button" class="ghost-btn">Surprise me</button>
+        <button id="export" type="button" class="export-btn">Export PNG</button>
+      </div>
+      <p class="note">Export renders the cover at full size — 1080 × 1080, 1080 × 1350 or 1920 × 1080 — and downloads a PNG.</p>
+    </aside>
+  </main>
+
+  <footer class="foot">
+    <span>Sunset Cover Studio · an original cover maker · display type: Anton (SIL Open Font License) · sample photos are AI-made for this app</span>
+  </footer>
+</div>
+
+<div id="shot-holder"></div>
+<div id="toast" role="status"></div>
+<script type="module" src="./src/boot.js"></script>
 </body>
 </html>
